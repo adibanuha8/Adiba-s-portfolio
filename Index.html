@@ -30,7 +30,12 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
     <script type="module">
   import { initializeApp } from "https://www.gstatic.com/firebasejs/12.7.1/firebase-app.js";
-
+import { getAuth } from "https://www.gstatic.com/firebasejs/12.7.1/firebase-auth.js";
+import {
+  signInWithEmailAndPassword,
+  createUserWithEmailAndPassword
+} from "https://www.gstatic.com/firebasejs/12.7.1/firebase-auth.js";
+        
 const firebaseConfig = {
   apiKey: "AIzaSyAgsgTsJhjki-KvyJhCIuu51_NPYlY2gP8",
   authDomain: "adiba-s-portfolio.firebaseapp.com",
@@ -42,6 +47,41 @@ const firebaseConfig = {
 };
 
 const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+        
+ window.firebaseLogin = async function () {
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value;
+
+    if (!email || !password) {
+        alert("Please enter your email and password.");
+        return;
+    }
+
+    try {
+        await signInWithEmailAndPassword(auth, email, password);
+        alert("Login successful!");
+    } catch (error) {
+        alert("Login failed: " + error.message);
+    }
+};
+    window.firebaseSignup = async function () {
+    const email = document.getElementById("login-email").value.trim();
+    const password = document.getElementById("login-password").value;
+
+    if (!email || !password) {
+        alert("Please enter your email and password.");
+        return;
+    }
+
+    try {
+        await createUserWithEmailAndPassword(auth, email, password);
+        alert("Account created successfully!");
+    } catch (error) {
+        alert("Signup failed: " + error.message);
+    }
+};    
+        
 </script>
 </head>
 
