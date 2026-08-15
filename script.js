@@ -5,6 +5,11 @@
 
 document.addEventListener("DOMContentLoaded", () => {
 
+const loader = document.getElementById("page-loader");
+if (loader) {
+    loader.style.display = "none";
+}
+    
     // ==============================
     // MOBILE MENU
     // ==============================
